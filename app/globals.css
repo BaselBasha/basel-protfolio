@@ -1,26 +1,97 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Colors */
+  --color-bg:             #080808;
+  --color-bg-secondary:   #0F0F0F;
+  --color-bg-elevated:    #161616;
+  --color-border:         #1E1E1E;
+  --color-border-light:   #2A2A2A;
+  --color-text-primary:   #F0EDE8;
+  --color-text-secondary: #8A8580;
+  --color-text-tertiary:  #4A4742;
+  --color-accent:         #E8A020;
+  --color-accent-dim:     rgba(232, 160, 32, 0.13);
+  --color-accent-hover:   #F0B030;
+  --color-success:        #3ECF8E;
+  --color-error:          #E5152D;
+
+  /* Fonts */
+  --font-display: var(--font-syne), sans-serif;
+  --font-sans:    var(--font-dm-sans), sans-serif;
+  --font-mono:    var(--font-mono), monospace;
+
+  /* Spacing */
+  --spacing-micro: 4px;
+  --spacing-xs:    8px;
+  --spacing-sm:    12px;
+  --spacing-md:    16px;
+  --spacing-lg:    24px;
+  --spacing-xl:    32px;
+  --spacing-2xl:   48px;
+  --spacing-3xl:   64px;
+  --spacing-4xl:   96px;
+  --spacing-5xl:   128px;
+
+  /* Radius */
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   16px;
+  --radius-full: 9999px;
+
+  /* Max widths */
+  --width-page:    1280px;
+  --width-content: 1120px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  html {
+    scroll-behavior: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text-primary);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: var(--color-bg);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes line-grow {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
 }
