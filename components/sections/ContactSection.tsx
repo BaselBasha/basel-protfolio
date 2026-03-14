@@ -9,22 +9,30 @@ import { Github, Linkedin, Mail, MapPin, Globe } from 'lucide-react';
 export function ContactSection() {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState('');
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitting(true);
+    setError('');
     const form = e.currentTarget;
     const data = new FormData(form);
 
     try {
-      await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+      const res = await fetch('/api/contact', {
         method: 'POST',
-        body: data,
-        headers: { Accept: 'application/json' },
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: data.get('name'),
+          email: data.get('email'),
+          message: data.get('message'),
+        }),
       });
+
+      if (!res.ok) throw new Error('Failed to send');
       setSubmitted(true);
     } catch {
-      // Silently fail — user can retry
+      setError('Something went wrong. Please try again or email me directly.');
     } finally {
       setSubmitting(false);
     }
@@ -99,6 +107,9 @@ export function ContactSection() {
                 <Button variant="primary" className="w-full justify-center">
                   {submitting ? 'Sending...' : 'Send Message'}
                 </Button>
+                {error && (
+                  <p className="font-sans text-sm text-error text-center mt-2">{error}</p>
+                )}
               </form>
             )}
           </ScrollReveal>

@@ -19,47 +19,58 @@ export function Navbar() {
 
   return (
     <>
-      <nav
-        className={`fixed top-0 left-0 w-full z-100 transition-all duration-300 ${
-          scrolled
-            ? 'bg-bg/90 backdrop-blur-md border-b border-border'
-            : 'bg-transparent border-b border-transparent'
-        }`}
-      >
-        <div className="flex items-center justify-between h-16 md:h-16 px-6 md:px-20 max-w-[var(--width-page)] mx-auto">
-          {/* Wordmark */}
-          <a href="/" className="font-display text-xl font-bold text-text-primary tracking-tight">
-            BA
-          </a>
+      <nav className="fixed w-full z-100 top-0 left-0 px-4 pt-4">
+        <div
+          className={`mx-auto max-w-[var(--width-page)] rounded-full px-5 md:px-8 transition-all duration-500 ${
+            scrolled
+              ? 'bg-bg/60 backdrop-blur-xl border border-border-light/40 shadow-lg shadow-black/20'
+              : 'bg-bg/30 backdrop-blur-md border border-border/30'
+          }`}
+        >
+          <div className="flex items-center justify-between h-14 md:h-16">
+            {/* Wordmark */}
+            <a
+              href="/"
+              className="font-display text-xl font-bold text-text-primary tracking-tight"
+            >
+              BA
+            </a>
 
-          {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-8">
-            {navLinks.map(link => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="relative font-mono text-xs tracking-[0.08em] uppercase text-text-secondary hover:text-text-primary transition-colors duration-200 group"
-              >
-                {link.label}
-                <span className="absolute bottom-0 left-0 w-full h-px bg-accent origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
-              </a>
-            ))}
-
-            {/* Available pill */}
-            <div className="flex items-center gap-2 bg-success/10 border border-success/30 rounded-full px-2.5 py-1">
-              <div className="w-2 h-2 rounded-full bg-success animate-pulse" />
-              <span className="font-mono text-[11px] text-success tracking-wider">Open to work</span>
+            {/* Desktop nav — centered */}
+            <div className="hidden md:flex flex-1 items-center justify-center">
+              <div className="flex items-center gap-1">
+                {navLinks.map((link) => (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    className="relative px-3.5 py-1.5 rounded-full font-mono text-xs tracking-[0.08em] uppercase text-text-secondary hover:text-text-primary hover:bg-text-primary/5 transition-all duration-200 group"
+                  >
+                    {link.label}
+                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </a>
+                ))}
+              </div>
             </div>
-          </div>
 
-          {/* Mobile hamburger */}
-          <button
-            className="md:hidden text-text-primary p-2"
-            onClick={() => setMenuOpen(true)}
-            aria-label="Open menu"
-          >
-            <Menu size={24} />
-          </button>
+            {/* Right side — Available pill */}
+            <div className="hidden md:flex items-center gap-3 shrink-0">
+              <div className="flex items-center gap-2 bg-success/10 border border-success/30 rounded-full px-2.5 py-1">
+                <div className="w-2 h-2 rounded-full bg-success animate-pulse" />
+                <span className="font-mono text-[11px] text-success tracking-wider">
+                  Open to work
+                </span>
+              </div>
+            </div>
+
+            {/* Mobile hamburger */}
+            <button
+              className="md:hidden text-text-primary p-2"
+              onClick={() => setMenuOpen(true)}
+              aria-label="Open menu"
+            >
+              <Menu size={22} />
+            </button>
+          </div>
         </div>
       </nav>
 
@@ -88,7 +99,11 @@ export function Navbar() {
                   onClick={() => setMenuOpen(false)}
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: i * 0.08, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{
+                    delay: i * 0.08,
+                    duration: 0.4,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
                   className="font-display text-4xl font-bold text-text-primary hover:text-accent transition-colors"
                 >
                   {link.label}
@@ -103,7 +118,9 @@ export function Navbar() {
               className="mt-12 flex items-center gap-2 bg-success/10 border border-success/30 rounded-full px-3 py-1.5"
             >
               <div className="w-2 h-2 rounded-full bg-success animate-pulse" />
-              <span className="font-mono text-[11px] text-success tracking-wider">Open to work</span>
+              <span className="font-mono text-[11px] text-success tracking-wider">
+                Open to work
+              </span>
             </motion.div>
           </motion.div>
         )}

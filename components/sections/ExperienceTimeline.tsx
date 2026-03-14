@@ -22,14 +22,14 @@ function TypeBadge({ type }: { type: 'remote' | 'onsite' | 'hybrid' }) {
 
 export function ExperienceTimeline() {
   return (
-    <section id="experience" className="py-[var(--spacing-5xl)] relative">
+    <section id="experience" className="py-5xl relative">
       <div className="max-w-[var(--width-content)] mx-auto px-6 md:px-20">
         <ScrollReveal>
           <SectionLabel number="02" label="EXPERIENCE" />
         </ScrollReveal>
 
         <ScrollReveal delay={0.1}>
-          <h2 className="font-sans font-semibold text-[clamp(28px,4vw,48px)] text-text-primary mb-16 tracking-[-0.02em]">
+          <h2 className="font-sans font-semibold text-[clamp(28px,4vw,48px)] text-text-primary mb-20 tracking-[-0.02em]">
             Where I&apos;ve worked.
           </h2>
         </ScrollReveal>
@@ -41,7 +41,7 @@ export function ExperienceTimeline() {
 
           {experiences.map((exp, index) => (
             <ScrollReveal key={exp.company} delay={index * 0.1}>
-              <div className="flex flex-col md:flex-row gap-6 md:gap-12 mb-12 pb-12 border-b border-border last:border-b-0 last:mb-0 last:pb-0">
+              <div className="flex flex-col md:flex-row gap-6 md:gap-12 mb-14 pb-14 border-b border-border last:border-b-0 last:mb-0 last:pb-0">
                 {/* Left column */}
                 <div className="md:w-[280px] flex-shrink-0">
                   <h3 className="font-sans font-semibold text-xl text-text-primary mb-1">

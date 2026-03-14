@@ -76,11 +76,19 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
           </div>
         </div>
 
-        {/* Right: visual placeholder */}
-        <div className="hidden md:flex w-[45%] min-h-[200px] bg-bg-elevated border border-border rounded-md items-center justify-center">
-          <span className="font-display text-3xl text-text-tertiary/30 font-bold text-center px-4">
-            {project.name}
-          </span>
+        {/* Right: project visual */}
+        <div className="hidden md:flex w-[45%] min-h-[200px] bg-bg-elevated border border-border rounded-md items-center justify-center overflow-hidden">
+          {project.hasImage && project.image ? (
+            <img
+              src={project.image}
+              alt={project.name}
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <span className="font-display text-3xl text-text-tertiary/30 font-bold text-center px-4">
+              {project.name}
+            </span>
+          )}
         </div>
       </div>
     </motion.div>

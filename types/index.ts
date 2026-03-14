@@ -25,6 +25,7 @@ export interface Project {
   githubUrl: string | null;
   featured: boolean;
   hasImage: boolean;
+  image?: string;
 }
 
 export interface Experience {

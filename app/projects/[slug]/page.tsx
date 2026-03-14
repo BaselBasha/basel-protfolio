@@ -69,10 +69,18 @@ export default async function ProjectPage({ params }: PageProps) {
 
         {/* Image area */}
         <ScrollReveal delay={0.1}>
-          <div className="w-full aspect-video bg-bg-secondary border border-border rounded-md mb-16 flex items-center justify-center">
-            <span className="font-display text-[clamp(32px,5vw,64px)] text-text-tertiary/20 font-bold text-center px-8">
-              {project.name}
-            </span>
+          <div className="w-full aspect-video bg-bg-secondary border border-border rounded-md mb-16 flex items-center justify-center overflow-hidden">
+            {project.hasImage && project.image ? (
+              <img
+                src={project.image}
+                alt={project.name}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <span className="font-display text-[clamp(32px,5vw,64px)] text-text-tertiary/20 font-bold text-center px-8">
+                {project.name}
+              </span>
+            )}
           </div>
         </ScrollReveal>
 

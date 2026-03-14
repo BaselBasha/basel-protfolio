@@ -126,6 +126,14 @@ export function Hero() {
             >
               <Button variant="primary" href="#work">View Work</Button>
               <Button variant="ghost" href="#contact">Get in Touch</Button>
+              <a
+                href="/pdf/BaselBashaCV.pdf"
+                download
+                className="inline-flex items-center gap-2 font-mono text-xs tracking-wider uppercase text-text-secondary border border-border hover:border-accent hover:text-accent px-4 py-2.5 rounded-sm transition-colors duration-200"
+              >
+                <ArrowDown size={14} />
+                Download CV
+              </a>
               <Button variant="icon" href={siteConfig.github} external>
                 <Github size={18} />
               </Button>
