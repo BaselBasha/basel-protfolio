@@ -1,8 +1,9 @@
 'use client';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Sun, Moon } from 'lucide-react';
 import { useScrollProgress } from '@/hooks/useScrollProgress';
+import { useTheme } from '@/components/providers/ThemeProvider';
 
 const navLinks = [
   { label: 'Work', href: '#work' },
@@ -15,6 +16,7 @@ const navLinks = [
 export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { scrollY } = useScrollProgress();
+  const { theme, toggleTheme } = useTheme();
   const scrolled = scrollY > 20;
 
   return (
@@ -52,8 +54,26 @@ export function Navbar() {
               </div>
             </div>
 
-            {/* Right side — Available pill */}
+            {/* Right side — Theme toggle + Available pill */}
             <div className="hidden md:flex items-center gap-3 shrink-0">
+              <button
+                onClick={toggleTheme}
+                className="relative p-2 rounded-full text-text-secondary hover:text-text-primary hover:bg-text-primary/5 transition-all duration-200"
+                aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+              >
+                <AnimatePresence mode="wait" initial={false}>
+                  <motion.span
+                    key={theme}
+                    initial={{ rotate: -90, scale: 0, opacity: 0 }}
+                    animate={{ rotate: 0, scale: 1, opacity: 1 }}
+                    exit={{ rotate: 90, scale: 0, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="block"
+                  >
+                    {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+                  </motion.span>
+                </AnimatePresence>
+              </button>
               <div className="flex items-center gap-2 bg-success/10 border border-success/30 rounded-full px-2.5 py-1">
                 <div className="w-2 h-2 rounded-full bg-success animate-pulse" />
                 <span className="font-mono text-[11px] text-success tracking-wider">
@@ -111,11 +131,23 @@ export function Navbar() {
               ))}
             </div>
 
+            {/* Theme toggle — mobile */}
+            <motion.button
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.45 }}
+              onClick={toggleTheme}
+              className="mt-8 p-3 rounded-full border border-border-light text-text-secondary hover:text-text-primary transition-colors"
+              aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+            >
+              {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+            </motion.button>
+
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
-              className="mt-12 flex items-center gap-2 bg-success/10 border border-success/30 rounded-full px-3 py-1.5"
+              className="mt-4 flex items-center gap-2 bg-success/10 border border-success/30 rounded-full px-3 py-1.5"
             >
               <div className="w-2 h-2 rounded-full bg-success animate-pulse" />
               <span className="font-mono text-[11px] text-success tracking-wider">

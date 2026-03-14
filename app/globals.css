@@ -44,6 +44,23 @@
   --width-content: 1120px;
 }
 
+/* ─── Light-mode token overrides ─── */
+[data-theme="light"] {
+  --color-bg:             #F8F6F3;
+  --color-bg-secondary:   #EFECE8;
+  --color-bg-elevated:    #E8E4DF;
+  --color-border:         #DCD8D2;
+  --color-border-light:   #CCC8C0;
+  --color-text-primary:   #1A1816;
+  --color-text-secondary: #5C5850;
+  --color-text-tertiary:  #9A958D;
+  --color-accent:         #D08A10;
+  --color-accent-dim:     rgba(208, 138, 16, 0.12);
+  --color-accent-hover:   #C07A00;
+  --color-success:        #2AAF70;
+  --color-error:          #D41428;
+}
+
 @layer base {
   *, *::before, *::after {
     box-sizing: border-box;
@@ -63,6 +80,7 @@
     color: var(--color-text-primary);
     font-family: var(--font-sans);
     overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   ::selection {

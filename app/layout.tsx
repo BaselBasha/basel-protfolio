@@ -4,7 +4,21 @@ import { LenisProvider } from '@/components/providers/LenisProvider';
 import { CustomCursor } from '@/components/layout/CustomCursor';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
+import { ThemeProvider } from '@/components/providers/ThemeProvider';
 import './globals.css';
+
+const themeScript = `
+(function(){
+  try {
+    var t = localStorage.getItem('theme');
+    if (t === 'light' || t === 'dark') {
+      document.documentElement.setAttribute('data-theme', t);
+    } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  } catch(e) {}
+})()
+`;
 
 const syne = Syne({
   subsets: ['latin'],
@@ -61,13 +75,18 @@ export default function RootLayout({
       className={`${syne.variable} ${dmSans.variable} ${ibmPlexMono.variable}`}
       suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body>
-        <LenisProvider>
-          <CustomCursor />
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
-        </LenisProvider>
+        <ThemeProvider>
+          <LenisProvider>
+            <CustomCursor />
+            <Navbar />
+            <main>{children}</main>
+            <Footer />
+          </LenisProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
