@@ -10,11 +10,11 @@ import { siteConfig } from '@/lib/content';
 
 const orbitingTech = [
   { label: 'Next.js', angle: 0 },
-  { label: 'TypeScript', angle: 60 },
-  { label: 'AWS', angle: 120 },
-  { label: 'Node.js', angle: 180 },
-  { label: 'Docker', angle: 240 },
-  { label: 'React', angle: 300 },
+  { label: 'NestJS', angle: 60 },
+  { label: 'Docker', angle: 120 },
+  { label: 'AWS', angle: 180 },
+  { label: 'PostgreSQL', angle: 240 },
+  { label: 'MongoDB', angle: 300 },
 ];
 
 export function Hero() {
@@ -129,7 +129,7 @@ export function Hero() {
               <a
                 href="/pdf/BaselBashaCV.pdf"
                 download
-                className="inline-flex items-center gap-2 font-mono text-xs tracking-wider uppercase text-text-secondary border border-border hover:border-accent hover:text-accent px-4 py-2.5 rounded-sm transition-colors duration-200"
+                className="inline-flex items-center gap-2 font-mono text-xs tracking-widest uppercase text-text-secondary border border-border-light hover:border-border-light hover:text-text-primary hover:bg-bg-elevated px-6 py-3 rounded-sm transition-all duration-250"
               >
                 <ArrowDown size={14} />
                 Download CV

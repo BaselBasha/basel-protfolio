@@ -135,7 +135,7 @@ export const experiences: Experience[] = [
   {
     company: 'Reevez',
     role: 'Founder & Lead Engineer',
-    period: { start: '2025', end: 'Present' },
+    period: { start: '2025', end: 'Side Project' },
     type: 'remote',
     location: 'Remote',
     highlights: [

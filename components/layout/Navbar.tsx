@@ -1,5 +1,6 @@
 'use client';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Sun, Moon } from 'lucide-react';
 import { useScrollProgress } from '@/hooks/useScrollProgress';
@@ -17,7 +18,30 @@ export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { scrollY } = useScrollProgress();
   const { theme, toggleTheme } = useTheme();
+  const pathname = usePathname();
+  const router = useRouter();
   const scrolled = scrollY > 20;
+
+  const handleNavClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (!href.startsWith('#')) return;
+    e.preventDefault();
+    const id = href.slice(1);
+
+    if (pathname !== '/') {
+      router.push(`/#${id}`);
+      return;
+    }
+
+    const el = document.getElementById(id);
+    if (el) {
+      if (window.__lenis) {
+        window.__lenis.scrollTo(el, { offset: -80 });
+      } else {
+        const top = el.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    }
+  }, [pathname, router]);
 
   return (
     <>
@@ -45,6 +69,7 @@ export function Navbar() {
                   <a
                     key={link.label}
                     href={link.href}
+                    onClick={(e) => handleNavClick(e, link.href)}
                     className="relative px-3.5 py-1.5 rounded-full font-mono text-xs tracking-[0.08em] uppercase text-text-secondary hover:text-text-primary hover:bg-text-primary/5 transition-all duration-200 group"
                   >
                     {link.label}
@@ -116,7 +141,7 @@ export function Navbar() {
                 <motion.a
                   key={link.label}
                   href={link.href}
-                  onClick={() => setMenuOpen(false)}
+                  onClick={(e) => { handleNavClick(e, link.href); setMenuOpen(false); }}
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{

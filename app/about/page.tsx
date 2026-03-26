@@ -23,7 +23,7 @@ export default function AboutPage() {
             <div className="relative">
               <div className="relative overflow-hidden rounded-md border border-border">
                 <Image
-                  src="/images/profile.png"
+                  src="/images/profilee.png"
                   alt="Basel Basha"
                   width={560}
                   height={700}
